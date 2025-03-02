@@ -21,4 +21,6 @@ jobs:
       - name: Installation test after precompilation
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh extension install thombashi/gh-actionarmor
+        run: |
+          gh extension install thombashi/gh-actionarmor
+          gh actionarmor --help
