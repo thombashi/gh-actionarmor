@@ -4,6 +4,13 @@
 
 ref: [Security hardening for GitHub Actions - GitHub Docs](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions#using-third-party-actions)
 
+[![Release](https://img.shields.io/github/release/thombashi/gh-actionarmor.svg?style=flat-square)](https://github.com/thombashi/gh-actionarmor/releases/latest)
+[![Go Reference](https://pkg.go.dev/badge/github.com/thombashi/gh-actionarmor.svg)](https://pkg.go.dev/github.com/thombashi/gh-actionarmor)
+[![Go Report Card](https://goreportcard.com/badge/github.com/thombashi/gh-actionarmor)](https://goreportcard.com/report/github.com/thombashi/gh-actionarmor)
+[![CI](https://github.com/thombashi/gh-actionarmor/actions/workflows/ci.yaml/badge.svg)](https://github.com/thombashi/gh-actionarmor/actions/workflows/ci.yaml)
+[![CodeQL](https://github.com/thombashi/gh-actionarmor/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/thombashi/gh-actionarmor/actions/workflows/github-code-scanning/codeql)
+
+
 [gh]: https://cli.github.com/
 
 
