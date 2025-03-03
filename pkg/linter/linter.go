@@ -713,6 +713,22 @@ func (l linter) lintJobUses(ctx context.Context, uses *actionlint.String, wfLint
 
 		params := wfLintInfo.Params
 
+		archived, archivedAt, err := l.isArchivedAction(*action)
+		if err != nil {
+			return newLintError(
+				fmt.Sprintf("failed to check if the action is archived: %s", err.Error()),
+				relPath, wfLintInfo, workflowPos.Pos, KindRuntimeError)
+		}
+		if archived {
+			if !*params.AllowArchivedRepo {
+				return newLintError(
+					fmt.Sprintf("archived action found: repo=%s, archived-at=%s", action.RepoID(), archivedAt.Format("2006-01-02")),
+					relPath, wfLintInfo, workflowPos.Pos, KindArchivedActionUsed)
+			}
+
+			logger.Warn("archived action found", slog.String("archived-at", archivedAt.String()))
+		}
+
 		if *params.ExcludeOfficialActions && slices.Contains(OfficialCreators, action.Owner) {
 			logValidActionFound(logger, "official action")
 			return nil
@@ -761,22 +777,6 @@ func (l linter) lintJobUses(ctx context.Context, uses *actionlint.String, wfLint
 				logValidActionFound(logger, "verified creator")
 				return nil
 			}
-		}
-
-		archived, archivedAt, err := l.isArchivedAction(*action)
-		if err != nil {
-			return newLintError(
-				fmt.Sprintf("failed to check if the action is archived: %s", err.Error()),
-				relPath, wfLintInfo, workflowPos.Pos, KindRuntimeError)
-		}
-		if archived {
-			if !*params.AllowArchivedRepo {
-				return newLintError(
-					fmt.Sprintf("archived action found: repo=%s, archived-at=%s", action.RepoID(), archivedAt.Format("2006-01-02")),
-					relPath, wfLintInfo, workflowPos.Pos, "archived action is not allowed")
-			}
-
-			logger.Warn("archived action found", slog.String("archived-at", archivedAt.String()))
 		}
 
 		err = l.checkVerifiedOrg(action.Owner, params)

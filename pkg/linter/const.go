@@ -4,9 +4,10 @@ package linter
 type ErrorKind string
 
 const (
-	KindRuntimeError    ErrorKind = "runtime error"
-	KindUnexpectedValue ErrorKind = "unexpected value"
-	KindUnpinned        ErrorKind = "must be pinned by hash"
+	KindArchivedActionUsed ErrorKind = "archived action action is being used"
+	KindRuntimeError       ErrorKind = "runtime error"
+	KindUnexpectedValue    ErrorKind = "unexpected value"
+	KindUnpinned           ErrorKind = "must be pinned by hash"
 )
 
 var OfficialCreators = []string{

@@ -377,6 +377,41 @@ func TestLintWorkflowContext(t *testing.T) {
 			},
 		},
 		{
+			name: "invalid workflow: archived official action",
+			workflowBody: []byte(dedent.Dedent(
+				`
+				name: Test Workflow
+				on: push
+				jobs:
+				  test:
+				    runs-on: ubuntu-latest
+				    steps:
+				      - uses: actions/create-release@v1
+				`)),
+			lintInfo: &WorkflowLintInfo{
+				Params: func() *WorkflowLintParams {
+					p, err := NewWorkflowLintParams(
+						WithExcludeOfficialActions(true),
+						WithAllowArchivedRepo(false),
+					)
+					r.NoError(err)
+					return p
+				}(),
+				RepoID: "owner/repo",
+			},
+			wantRuntimeError: false,
+			wantLintErrors: []*Error{
+				{
+					LintError: actionlint.Error{
+						Message: "archived action found: repo=actions/create-release, archived-at=2021-03-04",
+						Line:    8,
+						Column:  15,
+						Kind:    string(KindArchivedActionUsed),
+					},
+				},
+			},
+		},
+		{
 			name: "invalid workflow: include multiple errors",
 			workflowBody: []byte(dedent.Dedent(
 				`
