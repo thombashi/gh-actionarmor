@@ -172,13 +172,13 @@ func NewLinterFlagSet(flags *Flags) *NamedFlagSet {
 		"enforce using actions from verified organizations",
 	)
 
-	flagSet.StringSliceVar(
+	flagSet.StringArrayVar(
 		&flags.CreatorAllowlist,
 		creatorAllowlistFlagName,
 		[]string{},
 		"allowlist of creators (e.g. google-github-actions). if specified, those creators are excluded from the linting.",
 	)
-	flagSet.StringSliceVar(
+	flagSet.StringArrayVar(
 		&flags.ActionAllowlist,
 		actionAllowlistFlagName,
 		[]string{},
