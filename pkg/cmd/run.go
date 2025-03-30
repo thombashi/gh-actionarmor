@@ -62,6 +62,9 @@ func toWorkflowLintOptionsFromFlags(flags LinterFlags, logger *slog.Logger) []li
 
 		case creatorAllowlistFlagName:
 			opts = append(opts, linter.WithCreatorAllowlist(flags.CreatorAllowlist))
+
+		case actionAllowlistFlagName:
+			opts = append(opts, linter.WithActionAllowlist(flags.ActionAllowlist))
 		}
 	})
 
@@ -235,6 +238,8 @@ func Execute() (*Environment, []*linter.Error) {
 
 	wfInfoList, err := workflow.ListWorkflows(args, env.Logger)
 	eoe.ExitOnError(err, env.EoeParams.WithMessage("failed to list workflow file paths"))
+
+	// 再帰的に ListWorkflows を行う関数
 
 	if flags.ConfigFilePath != "" {
 		config = workflow.NewConfigFileFromFile(flags.ConfigFilePath)
