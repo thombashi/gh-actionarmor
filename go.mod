@@ -5,7 +5,7 @@ go 1.23.0
 toolchain go1.23.6
 
 require (
-	github.com/cli/go-gh/v2 v2.11.2
+	github.com/cli/go-gh/v2 v2.12.1
 	github.com/lithammer/dedent v1.1.0
 	github.com/phsym/console-slog v0.3.1
 	github.com/rhysd/actionlint v1.7.7
@@ -17,7 +17,7 @@ require (
 	github.com/thombashi/gh-taghash v0.4.0
 	github.com/thombashi/go-gitexec v0.1.0
 	golang.org/x/crypto v0.35.0
-	golang.org/x/sync v0.11.0
+	golang.org/x/sync v0.12.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -52,9 +52,9 @@ require (
 	github.com/thlib/go-timezone-local v0.0.6 // indirect
 	golang.org/x/exp v0.0.0-20250228200357-dead58393ab7 // indirect
 	golang.org/x/oauth2 v0.20.0 // indirect
-	golang.org/x/sys v0.30.0 // indirect
-	golang.org/x/term v0.29.0 // indirect
-	golang.org/x/text v0.22.0 // indirect
+	golang.org/x/sys v0.31.0 // indirect
+	golang.org/x/term v0.30.0 // indirect
+	golang.org/x/text v0.23.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gorm.io/gorm v1.25.12 // indirect
 	modernc.org/libc v1.61.13 // indirect
